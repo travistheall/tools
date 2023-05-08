@@ -19,13 +19,13 @@ export PYTHONPATH="./src"
 
 ### Format Imports
 ```bash
-isort src
+python -m isort src
 # ❯ Fixing PATH_TO_PROJECT/src/tests/test_dictionary.py
 ```
 
 ### Format Code
 ```bash
-black src
+python -m black src
 # ❯ All done! ✨ 🍰 ✨
 # ❯ 4 files left unchanged.
 ```
