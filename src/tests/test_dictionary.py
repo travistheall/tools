@@ -30,18 +30,22 @@ class TestImmutableKeyDefaultDict(unittest.TestCase):
     ######################
     def test_get_declared_key(self):
         """test basic dictionary getter"""
-        self.assertEqual(self.dict.get(A), A)
         self.assertEqual(self.dict[A], A)
+        self.assertEqual(self.dict.get(A), A)
+        self.assertEqual(self.dict.get(A, 1), A)
 
     def test_get_undeclared_key(self):
         """test default dictionary return value"""
         self.assertEqual(self.dict[C], None)
+        self.assertEqual(self.dict.get(C), None)
+        self.assertEqual(self.dict.get(C, 1), 1)
 
     def test_set_new_key(self):
         """test basic dictionary setter"""
         self.dict[C] = C
-        self.assertEqual(self.dict.get(C), C)
         self.assertEqual(self.dict[C], C)
+        self.assertEqual(self.dict.get(C), C)
+        self.assertEqual(self.dict.get(C, 1), C)
 
     def test_set_order_maintained_after_insertion(self):
         """test order inserted is maintained"""
