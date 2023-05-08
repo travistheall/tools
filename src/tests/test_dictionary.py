@@ -1,15 +1,11 @@
 """
-Default test cases for ImmutableKeyDefaultOrderedDict.
+Default test cases for ImmutableKeyDefaultDict.
 
 Aims to show intended usage of provided objects.
 """
 import unittest
 
-from dictionary import (
-    ImmutableKeyDefaultOrderedDict,
-    ImmutableKeyError,
-    TypeConversionMap,
-)
+from dictionary import ImmutableKeyDefaultDict, ImmutableKeyError, TypeConversionMap
 
 # Constants
 A = "a"
@@ -17,17 +13,17 @@ B = "b"
 C = "c"
 
 
-class TestImmutableDefaultOrderedDictionary(unittest.TestCase):
+class TestImmutableKeyDefaultDict(unittest.TestCase):
     """Run all tests with basic instantiation"""
 
     def setUp(self):
         """
         Test basic instantiation
-        >>> ImmutableKeyDefaultOrderedDict(a='a', b='b')
+        >>> ImmutableKeyDefaultDict(a='a', b='b')
         """
         self.base = {A: A, B: B}
         self.key_order = [A, B, C]
-        self.dict = ImmutableKeyDefaultOrderedDict(**self.base)
+        self.dict = ImmutableKeyDefaultDict(**self.base)
 
     ######################
     # Passing Test Cases #
@@ -97,16 +93,16 @@ class TestImmutableDefaultOrderedDictionary(unittest.TestCase):
             self.dict[C].update({A})
 
 
-class TestFromDict(TestImmutableDefaultOrderedDictionary):
+class TestFromDict(TestImmutableKeyDefaultDict):
     """Run all tests with slightly different instantiation"""
 
     def setUp(self):
         """
         Test instantiation from a dictionary.
-        >>> ImmutableKeyDefaultOrderedDict({'a':'a', 'b':'b'})
+        >>> ImmutableKeyDefaultDict({'a':'a', 'b':'b'})
         """
         super().setUp()
-        self.dict = ImmutableKeyDefaultOrderedDict(self.base)
+        self.dict = ImmutableKeyDefaultDict(self.base)
 
 
 class TestTypeConversionMap(unittest.TestCase):

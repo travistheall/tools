@@ -6,7 +6,6 @@ The idea behind this is throw an error when someone
 tries to set an existing item in the dictionary.
 Mutable data structures are cast to immutable equivalents.
 """
-import collections
 import types
 from typing import Any, Optional
 
@@ -52,7 +51,7 @@ class TypeConversionMap(dict):
         return super().get(key, None)
 
 
-class ImmutableKeyDefaultOrderedDict(collections.OrderedDict):
+class ImmutableKeyDefaultDict(dict):
     """
     Dictionary that allows insertion of new keys,
     but prohibits updates on the inserted keys.
@@ -62,7 +61,12 @@ class ImmutableKeyDefaultOrderedDict(collections.OrderedDict):
     conv_map = TypeConversionMap()
 
     def __getitem__(self, key: Any) -> Any:
-        """Mimic collections' default dict behavior."""
+        """
+        Mimic collections' default dict behavior,
+        but allows for other default to be set with
+        >>> d = dict({'a': 'a'})
+        >>> d.get('b', 'default')
+        """
         return super().get(key, None)
 
     def __setitem__(self, key: Any, value: Any) -> None:
