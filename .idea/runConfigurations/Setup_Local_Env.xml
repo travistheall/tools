@@ -1,0 +1,13 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Setup Local Env" type="BashProRunConfiguration">
+    <option name="defaultInterpreter" value="bash" />
+    <scriptContent>python3.9 -m venv venv
+source ./venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+export PYTHONPATH=&quot;./src&quot;</scriptContent>
+    <option name="sourceType" value="snippet" />
+    <option name="workingDirectory" value="$PROJECT_DIR$" />
+    <method v="2" />
+  </configuration>
+</component>

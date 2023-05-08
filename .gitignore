@@ -1,2 +1,4 @@
 .coverage
+.idea
+!.idea/runConfigurations/
 venv
