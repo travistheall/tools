@@ -1,3 +1,5 @@
-# python~=3.10.11
+# python~=3.9.16
+black=~23.3.0
 coverage~=7.2.5
+flake8-isort~=6.0.0
 pylint~=2.16.2
