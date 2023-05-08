@@ -8,7 +8,6 @@ Mutable data structures are cast to immutable equivalents.
 """
 import collections
 import types
-
 from typing import Any, Optional
 
 
@@ -17,6 +16,7 @@ class ImmutableKeyError(KeyError):
     Error for trying to set an existing
     key in an ImmutableKeyDefaultOrderedDict.
     """
+
     msg = "Immutable Key Dictionary. Cannot modify the key '%s'."
 
     def __init__(self, key: str) -> None:
@@ -31,12 +31,9 @@ class TypeConversionMap(dict):
     TypeConversionMap is used to provide immutable
     alternatives to mutable datastructures.
     """
+
     inst = None
-    conv_map = {
-        dict: types.MappingProxyType,
-        list: tuple,
-        set: frozenset
-    }
+    conv_map = {dict: types.MappingProxyType, list: tuple, set: frozenset}
 
     def __new__(cls):
         """Each instance of this class is conv_map with type key lookups."""
@@ -61,6 +58,7 @@ class ImmutableKeyDefaultOrderedDict(collections.OrderedDict):
     but prohibits updates on the inserted keys.
     It converts mutable value types into immutable equivalents.
     """
+
     conv_map = TypeConversionMap()
 
     def __getitem__(self, key: Any) -> Any:

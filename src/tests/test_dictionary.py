@@ -6,13 +6,15 @@ Aims to show intended usage of provided objects.
 import unittest
 
 from dictionary import (
-    ImmutableKeyDefaultOrderedDict, ImmutableKeyError, TypeConversionMap
+    ImmutableKeyDefaultOrderedDict,
+    ImmutableKeyError,
+    TypeConversionMap,
 )
 
 # Constants
-A = 'a'
-B = 'b'
-C = 'c'
+A = "a"
+B = "b"
+C = "c"
 
 
 class TestImmutableDefaultOrderedDictionary(unittest.TestCase):
@@ -23,10 +25,7 @@ class TestImmutableDefaultOrderedDictionary(unittest.TestCase):
         Test basic instantiation
         >>> ImmutableKeyDefaultOrderedDict(a='a', b='b')
         """
-        self.base = {
-            A: A,
-            B: B
-        }
+        self.base = {A: A, B: B}
         self.key_order = [A, B, C]
         self.dict = ImmutableKeyDefaultOrderedDict(**self.base)
 
@@ -59,9 +58,7 @@ class TestImmutableDefaultOrderedDictionary(unittest.TestCase):
     # Implemented
     def test_set_existing_key_fails(self):
         """test error raised on updating key"""
-        with self.assertRaisesRegex(
-            ImmutableKeyError, ImmutableKeyError.msg % A
-        ):
+        with self.assertRaisesRegex(ImmutableKeyError, ImmutableKeyError.msg % A):
             self.dict[A] = C
 
     # Default python objects
@@ -71,7 +68,7 @@ class TestImmutableDefaultOrderedDictionary(unittest.TestCase):
         https://docs.python.org/3/library/stdtypes.html?highlight=tuple#tuple
         test list type cast successful
         """
-        self.dict[C] = [C, ]
+        self.dict[C] = [C]
         with self.assertRaisesRegex(
             AttributeError, "'tuple' object has no attribute 'append'"
         ):
@@ -82,26 +79,22 @@ class TestImmutableDefaultOrderedDictionary(unittest.TestCase):
         https://docs.python.org/3/library/types.html?highlight=mappingproxytype#types.MappingProxyType
         test dict type cast successful
         """
-        self.dict[C] = {
-            C: C
-        }
+        self.dict[C] = {C: C}
         with self.assertRaisesRegex(
             TypeError, "'mappingproxy' object does not support item assignment"
         ):
-            self.dict[C][C] = {
-                A: A
-            }
+            self.dict[C][C] = {A: A}
 
     def test_set_val_as_set_type(self):
         """
         https://docs.python.org/3/library/stdtypes.html?highlight=frozenset#frozenset
         test set type cast successful
         """
-        self.dict[C] = {C, }
+        self.dict[C] = {C}
         with self.assertRaisesRegex(
             AttributeError, "'frozenset' object has no attribute 'update'"
         ):
-            self.dict[C].update({A, })
+            self.dict[C].update({A})
 
 
 class TestFromDict(TestImmutableDefaultOrderedDictionary):
@@ -133,11 +126,10 @@ class TestTypeConversionMap(unittest.TestCase):
         No need for two copies of the same dictionary.
         """
         with self.assertRaisesRegex(
-            AttributeError,
-            "'TypeConversionMap' object has no attribute 'conv_map'"
+            AttributeError, "'TypeConversionMap' object has no attribute 'conv_map'"
         ):
             _ = self.conv_map.conv_map
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
